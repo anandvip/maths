@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramanujan: The Magical Number Genius</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Space+Mono:wght@400;700&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #faf5e9;
+            --bg-secondary: #f4e8d0;
+            --bg-card: #fff9ed;
+            --text-primary: #2c1810;
+            --text-secondary: #5a4636;
+            --accent-magic: #d4af37;
+            --accent-discover: #c77d3c;
+            --accent-pattern: #8b5a3c;
+            --accent-mystical: #6b4226;
+            --border-color: #d4af37;
+            --shadow: rgba(212, 175, 55, 0.2);
+            --highlight: rgba(212, 175, 55, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1412;
+            --bg-secondary: #2a1f1a;
+            --bg-card: #342620;
+            --text-primary: #f4e8d0;
+            --text-secondary: #c9b89a;
+            --accent-magic: #f4d77e;
+            --accent-discover: #e8a768;
+            --accent-pattern: #d4a574;
+            --accent-mystical: #c9b89a;
+            --border-color: #f4d77e;
+            --shadow: rgba(244, 215, 126, 0.15);
+            --highlight: rgba(244, 215, 126, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--shadow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--shadow) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow);
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--accent-magic);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px var(--shadow);
+            animation: titleReveal 1s ease-out;
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-style: italic;
+            animation: titleReveal 1s ease-out 0.3s both;
+        }
+
+        /* Story Navigation */
+        .story-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .nav-card {
+            background: var(--bg-card);
+            border: 3px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--highlight), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-card:hover::before {
+            left: 100%;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .nav-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .nav-card h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-mystical);
+        }
+
+        .nav-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+
+        .content-section.active {
+            max-height: 10000px;
+            opacity: 1;
+            padding: 40px;
+            border: 3px solid var(--border-color);
+            animation: sectionReveal 0.6s ease-out;
+        }
+
+        @keyframes sectionReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            color: var(--accent-discover);
+            margin-bottom: 25px;
+            border-bottom: 3px solid var(--accent-magic);
+            padding-bottom: 15px;
+        }
+
+        .content-section h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            color: var(--accent-pattern);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Interactive Story Elements */
+        .story-box {
+            background: var(--bg-card);
+            border-left: 5px solid var(--accent-magic);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px var(--shadow);
+        }
+
+        .story-box.mystical {
+            border-left-color: var(--accent-mystical);
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--highlight) 100%);
+        }
+
+        .reveal-box {
+            background: var(--bg-card);
+            border: 2px dashed var(--border-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reveal-box:hover {
+            background: var(--highlight);
+            border-style: solid;
+        }
+
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .reveal-box.revealed .reveal-content {
+            max-height: 1000px;
+            margin-top: 15px;
+        }
+
+        .reveal-box::after {
+            content: '👇 Click to reveal!';
+            display: block;
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-discover);
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .reveal-box.revealed::after {
+            content: '✨ Mystery revealed!';
+        }
+
+        /* Application Cards */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .app-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--highlight) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .app-card:hover::before {
+            opacity: 1;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .app-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .app-card h4 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.4rem;
+            color: var(--accent-discover);
+            margin-bottom: 10px;
+        }
+
+        /* Pattern Demonstrations */
+        .pattern-demo {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 3px solid var(--accent-pattern);
+            text-align: center;
+        }
+
+        .pattern-visual {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--accent-magic);
+            margin: 20px 0;
+            letter-spacing: 3px;
+            animation: patternPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes patternPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Interactive Quiz */
+        .quiz-box {
+            background: linear-gradient(135deg, var(--bg-card), var(--highlight));
+            border: 3px solid var(--accent-discover);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .quiz-question {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            color: var(--accent-mystical);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .quiz-option:hover {
+            background: var(--highlight);
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #90ee90;
+            border-color: #228b22;
+            color: #006400;
+        }
+
+        .quiz-option.wrong {
+            background: #ffcccb;
+            border-color: #dc143c;
+            color: #8b0000;
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-magic);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 5px 5px 15px var(--shadow);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--accent-magic);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Highlight System */
+        .highlightable {
+            cursor: pointer;
+            transition: background 0.2s ease;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .highlightable.highlighted {
+            background: var(--highlight);
+            border-bottom: 2px solid var(--accent-magic);
+        }
+
+        .notes-section {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-mystical);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .notes-section textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 3px solid var(--border-color);
+            padding: 40px 20px;
+            margin-top: 60px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            color: var(--accent-magic);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .theme-toggle {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .story-nav {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .loading {
+            animation: shimmer 2s infinite;
+            background: linear-gradient(to right, var(--bg-card) 4%, var(--highlight) 25%, var(--bg-card) 36%);
+            background-size: 1000px 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+            <h1>Ramanujan: The Magical Number Genius</h1>
+            <p class="subtitle">When Dreams Became Mathematics</p>
+        </header>
+
+        <div class="story-nav">
+            <div class="nav-card" onclick="showSection('story')">
+                <span class="nav-icon">✨</span>
+                <h3>The Mystical Story</h3>
+                <p>How a goddess whispered mathematics to a young boy</p>
+            </div>
+            <div class="nav-card" onclick="showSection('applications')">
+                <span class="nav-icon">🚀</span>
+                <h3>Changing The World</h3>
+                <p>How his formulas help us today</p>
+            </div>
+            <div class="nav-card" onclick="showSection('patterns')">
+                <span class="nav-icon">🌀</span>
+                <h3>Beautiful Patterns</h3>
+                <p>The magic hidden in numbers</p>
+            </div>
+        </div>
+
+        <!-- STORY SECTION -->
+        <div id="story" class="content-section">
+            <h2>✨ The Boy Who Saw Numbers in Dreams</h2>
+            
+            <div class="story-box mystical">
+                <h3>🕉️ A Special Beginning</h3>
+                <p>In 1887, in a small town in India called Erode, a baby boy was born. His name was <span class="highlightable" onclick="highlight(this)">Srinivasa Ramanujan</span>. His family wasn't rich or famous. They lived simply. But something extraordinary was about to happen.</p>
+                <p>Young Ramanujan loved numbers like you might love your favorite video game or sport. But for him, numbers weren't just for homework—they were like magical friends that showed him secrets!</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Age 7 - The Genius Awakens</h4>
+                        <p>He could solve math problems faster than his teachers could write them!</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Age 13 - First Magic Book</h4>
+                        <p>He got a book with 5,000 math formulas. He memorized them ALL and started creating his own!</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Age 22 - The Goddess Speaks</h4>
+                        <p>Something amazing happened: he started having dreams!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-box mystical">
+                <h3>🛕 The Goddess Named Namagiri</h3>
+                <p>Ramanujan's family worshipped a goddess named <span class="highlightable" onclick="highlight(this)">Namagiri Thayar</span>. She was their family's special goddess, like a divine guardian watching over them.</p>
+                <p>One night, something magical happened. Ramanujan had a dream. In this dream, he saw:</p>
+                <ul style="margin-left: 30px; margin-top: 15px; line-height: 2;">
+                    <li>📜 <strong>Scrolls of golden light</strong> unrolling before his eyes</li>
+                    <li>👅 <strong>Equations on his tongue</strong> - he could taste mathematics!</li>
+                    <li>🔴 <strong>A red screen</strong> where numbers danced and revealed their secrets</li>
+                    <li>✍️ <strong>A hand guiding his hand</strong> to write formulas he'd never seen before</li>
+                </ul>
+            </div>
+
+            <div class="reveal-box" onclick="revealContent(this)">
+                <h3>🤔 Was It Really Magic?</h3>
+                <div class="reveal-content">
+                    <p>Here's something interesting to think about: Was it really the goddess, or was Ramanujan's brain so powerful that it worked on math problems while he slept?</p>
+                    <p><strong>What scientists think:</strong> Your brain doesn't stop working when you sleep! It sorts through everything you learned during the day. Ramanujan studied math SO MUCH that his brain kept solving problems even in dreams!</p>
+                    <p><strong>What Ramanujan believed:</strong> He truly felt the goddess was showing him mathematical truths. His faith gave him confidence and joy.</p>
+                    <p><strong>The beautiful truth:</strong> Whether it was divine inspiration or his brilliant unconscious mind—or maybe BOTH—doesn't matter. What matters is: he listened to his inner voice and shared these discoveries with the world!</p>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <h3>📨 The Letter That Changed Everything</h3>
+                <p>In 1913, Ramanujan did something brave. Even though he was poor and unknown, he wrote a letter to one of the most famous mathematicians in England—a man named <span class="highlightable" onclick="highlight(this)">G.H. Hardy</span>.</p>
+                <p>In his letter, he included nine pages of formulas—equations that seemed impossible, magical, too strange to be true.</p>
+                <p>When Hardy saw them, he said: <em>"These must be true, because if they were not true, no one would have the imagination to invent them!"</em></p>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question">🧠 Memory Check: What did Ramanujan see in his dreams?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Video games and cartoons</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B) Scrolls of equations and numbers dancing</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) His favorite foods</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Flying elephants</div>
+                </div>
+                <div class="quiz-feedback"></div>
+            </div>
+
+            <div class="story-box">
+                <h3>💪 The Struggle & The Triumph</h3>
+                <p>Life wasn't easy for Ramanujan. He was poor. He got sick. The cold weather in England made him weak. But he never stopped creating mathematics.</p>
+                <p>Sadly, he died young—at only 32 years old. But in his short life, he created over <strong>3,900 mathematical formulas</strong>!</p>
+                <p>Even today, more than 100 years later, mathematicians are still trying to understand all his discoveries. Some of his "notebooks" were found decades after he died, and they contained treasures that scientists are STILL exploring!</p>
+            </div>
+        </div>
+
+        <!-- APPLICATIONS SECTION -->
+        <div id="applications" class="content-section">
+            <h2>🚀 How Ramanujan's Magic Helps Us TODAY</h2>
+            
+            <p>You might wonder: "Why should I care about some old formulas?" Here's the amazing answer: <strong>Ramanujan's mathematics is EVERYWHERE in modern life!</strong></p>
+
+            <div class="app-grid">
+                <div class="app-card">
+                    <div class="app-icon">💻</div>
+                    <h4>Your Computer & Phone</h4>
+                    <p>When you use apps, play games, or video chat with friends, computers need to do BILLIONS of calculations super fast. Ramanujan's formulas help computers calculate things like π (pi) with incredible speed!</p>
+                    <p><strong>Real example:</strong> In 1985, scientists used one of Ramanujan's formulas to calculate π to 17 million digits! Today's computers use his methods to go even further.</p>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🔐</div>
+                    <h4>Internet Security</h4>
+                    <p>When you buy something online or send a private message, special codes keep your information safe. These codes are based on number patterns—and guess what? Ramanujan discovered important patterns about how numbers behave!</p>
+                    <p><strong>Cool fact:</strong> His work on "partitions" (ways to break numbers into smaller pieces) helps create unbreakable codes.</p>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🌌</div>
+                    <h4>Space & Black Holes</h4>
+                    <p>Scientists studying black holes and string theory (a way to understand the universe) discovered that Ramanujan's "mock theta functions" perfectly describe how black holes work!</p>
+                    <p><strong>Mind-blowing:</strong> He wrote these formulas in 1920—BEFORE scientists even knew black holes existed!</p>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🧬</div>
+                    <h4>DNA & Medicine</h4>
+                    <p>Your DNA is like a code made of patterns. Scientists use mathematical patterns (like ones Ramanujan found) to understand how genes work and develop new medicines.</p>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">📡</div>
+                    <h4>Cell Phones & WiFi</h4>
+                    <p>When you stream videos or connect to WiFi, signals need to travel without getting mixed up. Ramanujan's work on how to arrange and organize numbers helps make sure your TikTok doesn't freeze!</p>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🎮</div>
+                    <h4>Video Games</h4>
+                    <p>Game developers use mathematical patterns to create realistic graphics, physics, and AI opponents. Efficient calculations (like Ramanujan's methods) mean smoother, faster games!</p>
+                </div>
+            </div>
+
+            <div class="story-box">
+                <h3>🎯 The Big Picture</h3>
+                <p>Here's what's amazing: Ramanujan never thought about computers or smartphones or the internet—because they didn't exist in his time!</p>
+                <p>He just loved discovering patterns in numbers. He found them beautiful. And it turns out, the patterns he discovered for their own beauty became EXACTLY what modern technology needed!</p>
+                <p><strong>Lesson:</strong> When you study something you love—just because it fascinates you—you never know how it might change the world someday!</p>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question">🧠 Memory Check: Which of these uses Ramanujan's work?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) Only old-fashioned math books</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">B) Computers, phones, space science, and internet security</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">C) Making pizza</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) Nothing useful</div>
+                </div>
+                <div class="quiz-feedback"></div>
+            </div>
+        </div>
+
+        <!-- PATTERNS SECTION -->
+        <div id="patterns" class="content-section">
+            <h2>🌀 The Beautiful Patterns Ramanujan Discovered</h2>
+            
+            <p>Imagine you have a superpower: you can see hidden patterns that no one else can see. That was Ramanujan's gift!</p>
+
+            <div class="pattern-demo">
+                <h3>🧮 Pattern #1: The Magic of Infinity</h3>
+                <p>Look at this crazy pattern Ramanujan discovered:</p>
+                <div class="pattern-visual">
+                    1 + 2 + 3 + 4 + 5 + ... (forever!) = -1/12
+                </div>
+                <p><strong>Wait, WHAT?!</strong> How can adding positive numbers forever give you a negative fraction?</p>
+                <div class="reveal-box" onclick="revealContent(this)">
+                    <h4>🔍 The Secret Explanation</h4>
+                    <div class="reveal-content">
+                        <p>This looks impossible, right? That's because in normal arithmetic, it IS impossible!</p>
+                        <p>But Ramanujan was working with something called "analytic continuation"—a special math technique where numbers behave differently when you extend them into imaginary dimensions.</p>
+                        <p><strong>Real-world use:</strong> This weird result shows up in quantum physics! It helps explain how particles behave at tiny scales.</p>
+                        <p><strong>For you:</strong> This teaches us that sometimes reality is stranger and more wonderful than we expect. Rules can change depending on how you look at things!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pattern-demo">
+                <h3>🎲 Pattern #2: Partition Magic</h3>
+                <p>Imagine you have 5 cookies. How many different ways can you share them?</p>
+                <ul style="text-align: left; max-width: 500px; margin: 20px auto;">
+                    <li>5 = 5 (keep them all!)</li>
+                    <li>5 = 4 + 1</li>
+                    <li>5 = 3 + 2</li>
+                    <li>5 = 3 + 1 + 1</li>
+                    <li>5 = 2 + 2 + 1</li>
+                    <li>5 = 2 + 1 + 1 + 1</li>
+                    <li>5 = 1 + 1 + 1 + 1 + 1</li>
+                </ul>
+                <p>That's 7 ways! Mathematicians call these "partitions."</p>
+                <p>Ramanujan discovered incredible patterns about partitions. For example:</p>
+                <div class="pattern-visual">
+                    Every 5th partition is divisible by 5!<br>
+                    Every 7th partition is divisible by 7!
+                </div>
+                <p><strong>Why it matters:</strong> These patterns help in coding theory, cryptography, and even understanding how particles arrange themselves in physics!</p>
+            </div>
+
+            <div class="pattern-demo">
+                <h3>🌊 Pattern #3: Infinite Fractions</h3>
+                <p>Ramanujan loved continued fractions—numbers that keep going forever:</p>
+                <div class="pattern-visual" style="font-size: 1.2rem;">
+                    1 + 1/(1 + 1/(1 + 1/(1 + ...)))
+                </div>
+                <p>This infinite pattern equals exactly <strong>1.618...</strong>, the famous "Golden Ratio" found in nature!</p>
+                <p>You can find this ratio in:</p>
+                <ul style="text-align: left; max-width: 500px; margin: 20px auto;">
+                    <li>🌻 Sunflower spirals</li>
+                    <li>🐚 Nautilus shells</li>
+                    <li>🌌 Galaxy arms</li>
+                    <li>🎨 Famous paintings and buildings</li>
+                </ul>
+            </div>
+
+            <div class="story-box">
+                <h3>🎨 Why Patterns Matter</h3>
+                <p>Ramanujan once said: <em>"An equation means nothing to me unless it expresses a thought of God."</em></p>
+                <p>For him, mathematical patterns weren't just numbers—they were like poetry, like music, like art. They showed him the hidden order and beauty of the universe.</p>
+                <p><strong>For you:</strong> Patterns are everywhere! In music (repeating beats), in nature (leaves, snowflakes), in sports (strategies), in art (symmetry). When you start noticing patterns, you're thinking like Ramanujan!</p>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question">🧠 Final Memory Challenge: What made Ramanujan special?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">A) He was rich and famous</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">B) He never made mistakes</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, true)">C) He could see patterns no one else saw and listened to his inner voice</div>
+                    <div class="quiz-option" onclick="checkAnswer(this, false)">D) He had a magic calculator</div>
+                </div>
+                <div class="quiz-feedback"></div>
+            </div>
+        </div>
+
+        <!-- NOTES SECTION -->
+        <div class="notes-section">
+            <h3 style="font-family: 'Crimson Pro', serif; color: var(--accent-mystical); margin-bottom: 15px;">
+                📝 Your Learning Notes
+            </h3>
+            <p style="margin-bottom: 15px; font-size: 0.95rem;">
+                Write down what amazed you! What patterns do you see in your own life? What questions do you have?
+            </p>
+            <textarea id="userNotes" placeholder="Type your thoughts here... your notes are saved automatically!"></textarea>
+        </div>
+
+        <div class="story-box" style="text-align: center; margin-top: 40px;">
+            <h3 style="font-size: 2rem; margin-bottom: 20px;">🌟 Your Own Genius Awaits</h3>
+            <p style="font-size: 1.2rem; line-height: 2;">
+                Ramanujan's story teaches us: <strong>Trust your curiosity. Follow what fascinates you. Listen to your inner voice.</strong>
+            </p>
+            <p style="font-size: 1.2rem; line-height: 2;">
+                Whether you love numbers, art, music, science, sports, or anything else—when you dive deep into what you love, you might just discover something that changes the world!
+            </p>
+            <p style="font-size: 1.4rem; margin-top: 20px; color: var(--accent-magic); font-weight: 700;">
+                ✨ What will YOUR genius discover? ✨
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title">📅 Creation Information</div>
+            <p><strong>Created:</strong> December 1, 2024 | 2024-12-01</p>
+            <p><strong>Purpose:</strong> This webpage was created as a comprehensive educational resource to introduce young learners (age 10+) to the extraordinary genius of Srinivasa Ramanujan. The goal is to make advanced mathematical concepts accessible and inspiring through storytelling, real-world applications, and interactive elements.</p>
+            
+            <div class="footer-title" style="margin-top: 20px;">🧠 Creator's Learning Context - Vipul Anand (Roger)</div>
+            <p><strong>What I was exploring:</strong> At the time of creating this resource, I was deeply engaged in understanding how consciousness interfaces with mathematical discovery, and how mystical/spiritual frameworks (like Ramanujan's devotion to Namagiri Thayar) relate to breakthrough insights. I'm particularly interested in:</p>
+            <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                <li>The intersection of intuitive/spiritual knowledge and rigorous mathematical proof</li>
+                <li>How ancient wisdom traditions (Vedantic consciousness studies, Jungian psychology) complement modern neuroscience's understanding of insight and creativity</li>
+                <li>Reality creation principles (Seth Material) and how consciousness "perceives" or "discovers" vs "creates" mathematical truths</li>
+                <li>The practical applications of "mystical" mathematics in quantum physics, cryptography, and modern technology</li>
+                <li>How to retain and share complex knowledge through interactive, story-driven learning experiences</li>
+                <li>Creating educational resources that bridge the abstract (consciousness, divine inspiration) with the concrete (measurable formulas, real-world applications)</li>
+            </ul>
+
+            <div class="footer-title" style="margin-top: 20px;">🎯 Design Philosophy</div>
+            <p>This page employs a "magical manuscript meets science museum" aesthetic to create wonder while maintaining intellectual rigor. The interactive elements, recall questions, and progressive reveal pattern support memory retention and active learning. The bilingual consciousness approach (mystical AND scientific explanations) honors both Ramanujan's lived experience and modern analytical frameworks.</p>
+
+            <div class="footer-title" style="margin-top: 20px;">📚 For Deeper Study</div>
+            <p>This page serves as a gateway, not a comprehensive resource. For those wanting to explore further, recommended paths include: Berndt's commentaries on Ramanujan's notebooks, research on mock modular forms and their physics applications, biographical works exploring the goddess Namagiri connection, and contemporary papers on Ramanujan's continuing influence in number theory and string theory.</p>
+
+            <div class="footer-title" style="margin-top: 20px;">🔄 Repository Organization</div>
+            <p><strong>File naming convention:</strong> ramanujan-magic-numbers.html</p>
+            <p><strong>Category:</strong> Educational/Mathematics/Consciousness Studies</p>
+            <p><strong>Timestamp:</strong> 2024-12-01T00:00:00Z</p>
+            <p><strong>Version:</strong> 1.0 - Initial comprehensive release</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+
+            // Load saved notes
+            const savedNotes = localStorage.getItem('ramanujanNotes');
+            if (savedNotes) {
+                document.getElementById('userNotes').value = savedNotes;
+            }
+        });
+
+        // Save notes automatically
+        document.getElementById('userNotes').addEventListener('input', function() {
+            localStorage.setItem('ramanujanNotes', this.value);
+        });
+
+        // Section Navigation
+        function showSection(sectionId) {
+            // Hide all sections first
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+
+            // Smooth scroll to section
+            selectedSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Reveal Box
+        function revealContent(element) {
+            element.classList.toggle('revealed');
+        }
+
+        // Highlighting System
+        function highlight(element) {
+            element.classList.toggle('highlighted');
+        }
+
+        // Quiz System
+        function checkAnswer(element, isCorrect) {
+            const quizBox = element.closest('.quiz-box');
+            const options = quizBox.querySelectorAll('.quiz-option');
+            const feedback = quizBox.querySelector('.quiz-feedback');
+
+            // Disable all options
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+
+            // Mark correct/wrong
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.innerHTML = '🎉 Excellent! You remembered correctly! Your brain is making strong connections!';
+                feedback.style.background = '#90ee90';
+                feedback.style.color = '#006400';
+            } else {
+                element.classList.add('wrong');
+                // Find and highlight correct answer
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) {
+                        opt.classList.add('correct');
+                    }
+                });
+                feedback.innerHTML = '💭 Not quite! Check the correct answer highlighted in green. Read that section again to strengthen your memory!';
+                feedback.style.background = '#ffcccb';
+                feedback.style.color = '#8b0000';
+            }
+
+            feedback.classList.add('show');
+
+            // Reset after 5 seconds
+            setTimeout(() => {
+                options.forEach(opt => {
+                    opt.classList.remove('correct', 'wrong');
+                    opt.style.pointerEvents = 'auto';
+                });
+                feedback.classList.remove('show');
+            }, 5000);
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add entrance animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animations
+        document.querySelectorAll('.app-card, .pattern-demo, .story-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
